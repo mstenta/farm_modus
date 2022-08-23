@@ -4,4 +4,6 @@ type: module
 package: farmOS Contrib
 core_version_requirement: ^9
 dependencies:
+  - farm_import
   - farm_lab_test
+  - farm_quick

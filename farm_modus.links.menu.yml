@@ -1,0 +1,4 @@
+farm.import.modus:
+  title: Modus Import
+  parent: farm.import
+  route_name: farm.import.modus

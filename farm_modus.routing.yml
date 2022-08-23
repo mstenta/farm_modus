@@ -1,0 +1,7 @@
+farm.import.modus:
+  path: '/import/modus'
+  defaults:
+    _form: Drupal\farm_modus\Form\ModusImporter
+    _title: 'Modus Import'
+  requirements:
+    _permission: 'import modus'

@@ -1,0 +1,3 @@
+farm_modus:
+  config_permissions:
+    - import modus
