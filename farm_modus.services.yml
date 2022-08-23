@@ -1,0 +1,3 @@
+services:
+  modus.parser:
+    class: Drupal\farm_modus\ModusParser
