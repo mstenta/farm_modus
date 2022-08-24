@@ -197,6 +197,23 @@ class ModusImporter extends FormBase {
         '#default_value' => $log['geometry'],
       ];
 
+      // Summarize the quantities.
+      if (!empty($log['quantity'])) {
+        $quantity_summary = [];
+        foreach ($log['quantity'] as $qty) {
+          $quantity_summary[] = $qty['label'] . ': ' . $qty['value'] . ' ' . $qty['units'];
+        }
+        $form['output']['logs'][$i]['quantities'] = [
+          '#type' => 'details',
+          '#title' => $this->t('Quantities'),
+          '#open' => TRUE,
+          'items' => [
+            '#theme' => 'item_list',
+            '#items' => $quantity_summary,
+          ],
+        ];
+      }
+
       // Confirmation checkbox.
       $form['output']['logs'][$i]['confirm'] = [
         '#type' => 'checkbox',
