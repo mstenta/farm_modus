@@ -97,6 +97,23 @@ class ModusImporter extends FormBase {
       '#required' => TRUE,
     ];
 
+    // Optionally specify a location asset to link the logs to.
+    $form['input']['location'] = [
+      '#type' => 'entity_autocomplete',
+      '#title' => $this->t('Location'),
+      '#description' => $this->t('Optionally associate logs with a location.'),
+      '#target_type' => 'asset',
+      '#selection_handler' => 'views',
+      '#selection_settings' => [
+        'view' => [
+          'view_name' => 'farm_location_reference',
+          'display_name' => 'entity_reference',
+          'arguments' => [],
+        ],
+        'match_operator' => 'CONTAINS',
+      ],
+    ];
+
     // Parse button.
     $form['input']['parse'] = [
       '#type' => 'submit',
@@ -288,6 +305,11 @@ class ModusImporter extends FormBase {
 
     // Create new logs.
     foreach ($confirmed_logs as $log) {
+
+      // If a location was specified, associate the log with it.
+      if (!empty($form_state->getValue('location'))) {
+        $log['log']['location'] = $form_state->getValue('location');
+      }
 
       // Create the log object from values.
       $new_log = Log::create($log['log']);
