@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: farm
+      POSTGRES_PASSWORD: farm
+      POSTGRES_DB: farm
+
+  www:
+    environment:
+      - MODULE_NAME
+    depends_on:
+      - db
+    image: farmos/farmos:2.x-dev
+    ports:
+      - '80:80'
+    volumes:
+      - './:/opt/drupal/web/modules/custom/${MODULE_NAME}'

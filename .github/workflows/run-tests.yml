@@ -1,0 +1,36 @@
+name: Run tests
+on:
+  schedule:
+    - cron: '0 8 * * *' # Run at 8AM UTC.
+  push:
+    branches:
+      - '1.x'
+      - '1.x-**'
+  pull_request_target:
+    branches:
+      - '1.x'
+
+jobs:
+  build:
+    name: Run tests
+    runs-on: ubuntu-latest
+    env:
+      COMPOSE_FILE: docker-compose.testing.yml
+      MODULE_NAME: farm_modus
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+      - name: Start containers
+        run: docker-compose up -d
+      - name: Include module dependencies
+        run: |
+          docker-compose exec -u www-data -T www composer config --merge --json extra.merge-plugin.include '["web/modules/custom/*/*.json"]'
+          docker-compose exec -u www-data -T www composer update
+      - name: Run PHP CodeSniffer
+        run: docker-compose exec -u www-data -T www phpcs /opt/drupal/web/modules/custom --exclude=DrupalPractice.InfoFiles.NamespacedDependency
+      - name: Run PHPUnit tests.
+        run: docker-compose exec -u www-data -T www phpunit /opt/drupal/web/modules/custom
+      - name: Install farmOS.
+        run: docker-compose exec -u www-data -T www bash -c "drush site-install --db-url=pgsql://farm:farm@db/farm farm farm.modules='base'"
+      - name: Test installing the module.
+        run: docker-compose exec -u www-data -T www bash -c "drush en $MODULE_NAME -y"
