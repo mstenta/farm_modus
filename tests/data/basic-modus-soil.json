@@ -1,0 +1,90 @@
+{
+  "_type": "application/vnd.modus.v1.modus-result+json",
+  "Events": [
+    {
+      "EventMetaData": {
+        "EventCode": "ece3a2a8-4340-48b1-ae1f-d48d1f1e1692",
+        "EventDate": "2021-09-24",
+        "EventType": {
+          "Soil": true
+        }
+      },
+      "LabMetaData": {
+        "LabName": "A & L Great Lakes Laboratories",
+        "LabEventID": "F21267-0039",
+        "Contact": {
+          "Name": "A & L Great Lakes Laboratories",
+          "Phone": "260.483.4759",
+          "Address": "3505 Conestoga Dr.\nFort Wayne, IN 46808"
+        },
+        "ReceivedDate": "2021-09-24T00:00:00.000",
+        "ProcessedDate": "2021-09-28T00:00:00.000",
+        "ClientAccount": {
+          "AccountNumber": "30039",
+          "Company": "THE ANDERSONS FARM CTR - GPS",
+          "Name": "",
+          "City": "N MANCHESTER",
+          "State": "IN"
+        },
+        "Reports": [
+          {
+            "ReportID": "1",
+            "LabReportID": "F21271-0035"
+          }
+        ]
+      },
+      "FMISMetaData": {
+        "FMISEventID": "ece3a2a8-4340-48b1-ae1f-d48d1f1e1692",
+        "FMISProfile": {
+          "Grower": "CARL AULT",
+          "Farm": "ENYART EAST 50",
+          "Field": "50.1 AC",
+          "Sub-Field": ""
+        }
+      },
+      "EventSamples": {
+        "Soil": {
+          "DepthRefs": [
+            {
+              "DepthID": 1,
+              "Name": "Unknown Depth",
+              "StartingDepth": 0,
+              "EndingDepth": 8,
+              "ColumnDepth": 8,
+              "DepthUnit": "in"
+            }
+          ],
+          "SoilSamples": [
+            {
+              "SampleMetaData": {
+                "SampleNumber": "1",
+                "ReportID": "28051"
+              },
+              "Depths": [
+                {
+                  "DepthID": "1",
+                  "NutrientResults": [
+                    { "Element": "pH", "Value": 7.0, "ValueUnit": "none" },
+                    { "Element": "OM", "Value": 2.4, "ValueUnit": "%" },
+                    { "Element": "P", "Value": 34, "ValueUnit": "ppm" },
+                    { "Element": "K", "Value": 161, "ValueUnit": "ppm" },
+                    { "Element": "Ca", "Value": 1150, "ValueUnit": "ppm" },
+                    { "Element": "Mg", "Value": 240, "ValueUnit": "ppm" },
+                    { "Element": "CEC", "Value": 8.2, "ValueUnit": "meq/100g" },
+                    { "Element": "BS-Ca", "Value": 70.4, "ValueUnit": "%" },
+                    { "Element": "BS-Mg", "Value": 24.5, "ValueUnit": "%" },
+                    { "Element": "BS-K", "Value": 5.1, "ValueUnit": "%" },
+                    { "Element": "SO4-S", "Value": 7, "ValueUnit": "ppm" },
+                    { "Element": "Zn", "Value": 3.3, "ValueUnit": "ppm" },
+                    { "Element": "Mn", "Value": 46, "ValueUnit": "ppm" },
+                    { "Element": "B", "Value": 0.7, "ValueUnit": "ppm" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
