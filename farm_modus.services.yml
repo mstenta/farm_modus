@@ -1,0 +1,5 @@
+services:
+  serializer.farm_modus.encoder.modus_json:
+    class: Drupal\farm_modus\Encoder\JsonEncoder
+    tags:
+      - { name: encoder, priority: 10, format: 'vnd.modus.v1.modus-result+json' }
