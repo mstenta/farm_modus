@@ -1,8 +1,9 @@
 <?php
 
-namespace Drupal\farm_modus\TypedData;
+namespace Drupal\farm_modus_soil\TypedData;
 
 use Drupal\Core\TypedData\ListDataDefinition;
+use Drupal\farm_modus\TypedData\ModusSlimBaseDefinition;
 
 /**
  * Data definition for Modus slim soil.

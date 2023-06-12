@@ -1,15 +1,15 @@
 <?php
 
-namespace Drupal\Tests\farm_modus\Kernel;
+namespace Drupal\Tests\farm_modus_soil\Kernel;
 
-use Drupal\farm_modus\TypedData\ModusSlimBaseDefinition;
 use Drupal\farm_modus\TypedData\ModusResultNutrientDefinition;
+use Drupal\farm_modus\TypedData\ModusSlimBaseDefinition;
 use Drupal\KernelTests\KernelTestBase;
 
 /**
  * Tests serialization of modus data.
  */
-class ModusSerializationTest extends KernelTestBase {
+class ModusSlimSerializationTest extends KernelTestBase {
 
   /**
    * The typed data manager.
@@ -37,6 +37,7 @@ class ModusSerializationTest extends KernelTestBase {
    */
   protected static $modules = [
     'farm_modus',
+    'farm_modus_soil',
     'serialization',
   ];
 
@@ -47,7 +48,7 @@ class ModusSerializationTest extends KernelTestBase {
     parent::setUp();
 
     $this->dataPath = $this->container->get('module_handler')
-      ->getModule('farm_modus')->getPath() . '/tests/data';
+      ->getModule('farm_modus_soil')->getPath() . '/tests/data';
 
     $this->typedDataManager = $this->container->get('typed_data_manager');
     $this->serializer = $this->container->get('serializer');
@@ -62,7 +63,7 @@ class ModusSerializationTest extends KernelTestBase {
     $json = file_get_contents($this->dataPath . '/basic-modus-soil.json');
     $format = 'vnd.modus.v1.modus-result+json';
 
-    /** @var \Drupal\farm_modus\Plugin\DataType\ModusSlimSoil[] $events */
+    /** @var \Drupal\farm_modus_soil\Plugin\DataType\ModusSlimSoil[] $events */
     $events = $this->serializer->deserialize($json, ModusSlimBaseDefinition::class, $format);
     $this->assertCount(1, $events, 'One modus event is deserialized.');
 

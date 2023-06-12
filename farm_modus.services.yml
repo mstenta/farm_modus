@@ -11,8 +11,3 @@ services:
     class: Drupal\farm_modus\Normalizer\ModusJsonLogWrapper
     tags:
       - { name: normalizer, priority: 10 }
-  serializer.farm_modus.normalizer.modus_soil_event:
-    class: Drupal\farm_modus\Normalizer\ModusEventSoil
-    tags:
-      - { name: normalizer, priority: 10 }
-    arguments: ['@typed_data_manager']
