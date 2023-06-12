@@ -3,6 +3,7 @@
 namespace Drupal\farm_modus_soil\Normalizer;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\farm_modus\TypedData\ModusSlimBaseDefinition;
 use Drupal\log\Entity\Log;
 use Drupal\quantity\Entity\Quantity;
@@ -17,6 +18,7 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class LabTestSoil implements DenormalizerInterface, SerializerAwareInterface {
 
   use SerializerAwareTrait;
+  use StringTranslationTrait;
 
   /**
    * The supported format.
@@ -57,12 +59,12 @@ class LabTestSoil implements DenormalizerInterface, SerializerAwareInterface {
     // Create a log for each event.
     $logs = [];
     foreach ($events as $event) {
-      $timestamp = $event->get('date')->getDateTime()->format('U');
       $default_log_data = [
         'type' => 'lab_test',
         'lab_test_type' => 'soil',
-        'timestamp' => $timestamp,
         'status' => 'done',
+        'timestamp' => $event->get('date')->getDateTime()->format('U'),
+        'name' => $this->t('Soil test: @id', ['@id' => $event->get('id')->getValue()]),
       ];
       foreach ($event->get('samples') as $sample) {
 
