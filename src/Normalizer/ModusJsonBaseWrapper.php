@@ -2,15 +2,14 @@
 
 namespace Drupal\farm_modus\Normalizer;
 
-use Drupal\farm_modus\TypedData\ModusSlimBaseDefinition;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
 
 /**
- * Normalized modus JSON into modus events.
+ * Abstract base class for denormalizing modus json to a specified data type.
  */
-class ModusJsonWrapper implements DenormalizerInterface, SerializerAwareInterface {
+abstract class ModusJsonBaseWrapper implements DenormalizerInterface, SerializerAwareInterface {
 
   use SerializerAwareTrait;
 
@@ -20,17 +19,12 @@ class ModusJsonWrapper implements DenormalizerInterface, SerializerAwareInterfac
   const FORMAT = 'vnd.modus.v1.modus-result+json';
 
   /**
-   * The supported type to (de)normalize to.
-   */
-  const TYPE = ModusSlimBaseDefinition::class;
-
-  /**
    * {@inheritDoc}
    */
   public function denormalize($data, $type, $format = NULL, array $context = []) {
 
-    // Build an array of events.
-    $events = [];
+    // Build an array of results.
+    $results = [];
     foreach ($data['Events'] ?? [] as $modus_event) {
 
       // Defer to normalizer based on event type.
@@ -44,15 +38,23 @@ class ModusJsonWrapper implements DenormalizerInterface, SerializerAwareInterfac
         $event_format = strtolower($event_type_id);
         $format = "vnd.modus.v1.modus-result.$event_format+json";
 
-        // Denormalize based on the format.
-        $events[] = $this->serializer->denormalize(
+        // Denormalize based on the type and format.
+        $result = $this->serializer->denormalize(
           $modus_event,
-          ModusSlimBaseDefinition::class,
+          static::TYPE,
           $format,
         );
+
+        // Collect a single or array of results.
+        if (is_array($result)) {
+          $results += $result;
+        }
+        else {
+          $results[] = $result;
+        }
       }
     }
-    return $events;
+    return $results;
   }
 
   /**
