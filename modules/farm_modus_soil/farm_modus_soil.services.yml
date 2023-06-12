@@ -4,3 +4,8 @@ services:
     tags:
       - { name: normalizer, priority: 10 }
     arguments: ['@typed_data_manager']
+  serializer.farm_modus_soil.normalizer.lab_test_soil:
+    class: Drupal\farm_modus_soil\Normalizer\LabTestSoil
+    tags:
+      - { name: normalizer, priority: 10 }
+    arguments: ['@entity_type.manager']
