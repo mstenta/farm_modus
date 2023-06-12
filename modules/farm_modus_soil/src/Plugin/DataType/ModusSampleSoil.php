@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\farm_modus\Plugin\DataType;
+namespace Drupal\farm_modus_soil\Plugin\DataType;
 
 use Drupal\Core\TypedData\Plugin\DataType\Map;
 
@@ -10,7 +10,7 @@ use Drupal\Core\TypedData\Plugin\DataType\Map;
  * @DataType(
  *   id = "modus_sample:soil",
  *   label = @Translation("Modus Soil Sample"),
- *   definition_class = "\Drupal\farm_modus\TypedData\ModusSampleSoilDefinition"
+ *   definition_class = "\Drupal\farm_modus_soil\TypedData\ModusSampleSoilDefinition"
  * )
  */
 class ModusSampleSoil extends Map {

@@ -1,0 +1,6 @@
+services:
+  serializer.farm_modus_soil.normalizer.modus_soil_event:
+    class: Drupal\farm_modus_soil\Normalizer\ModusEventSoil
+    tags:
+      - { name: normalizer, priority: 10 }
+    arguments: ['@typed_data_manager']

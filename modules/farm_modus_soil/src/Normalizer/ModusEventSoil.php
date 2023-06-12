@@ -1,9 +1,10 @@
 <?php
 
-namespace Drupal\farm_modus\Normalizer;
+namespace Drupal\farm_modus_soil\Normalizer;
 
+use Drupal\farm_modus\Normalizer\ModusEventBase;
 use Drupal\farm_modus\TypedData\ModusSlimBaseDefinition;
-use Drupal\farm_modus\TypedData\ModusSlimSoilDefinition;
+use Drupal\farm_modus_soil\TypedData\ModusSlimSoilDefinition;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**

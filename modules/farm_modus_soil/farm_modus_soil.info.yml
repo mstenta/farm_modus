@@ -1,0 +1,8 @@
+name: Modus Soil
+description: Provides integration with Modus Soil results.
+type: module
+package: farmOS Contrib
+core_version_requirement: ^9
+dependencies:
+  - farm_lab_test
+  - farm_modus
