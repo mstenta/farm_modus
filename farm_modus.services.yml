@@ -3,8 +3,8 @@ services:
     class: Drupal\farm_modus\Encoder\JsonEncoder
     tags:
       - { name: encoder, priority: 10, format: 'vnd.modus.v1.modus-result+json' }
-  serializer.farm_modus.normalizer.modus_json:
-    class: Drupal\farm_modus\Normalizer\ModusJsonWrapper
+  serializer.farm_modus.normalizer.modus_json_slim:
+    class: Drupal\farm_modus\Normalizer\ModusJsonSlimWrapper
     tags:
       - { name: normalizer, priority: 10 }
   serializer.farm_modus.normalizer.modus_soil_event:
