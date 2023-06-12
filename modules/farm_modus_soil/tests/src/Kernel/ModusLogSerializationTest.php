@@ -101,6 +101,7 @@ class ModusLogSerializationTest extends KernelTestBase {
     $this->assertEquals('soil', $log->get('lab_test_type')->value);
     $this->assertEquals('2021-09-24T00:00:00+00:00', DrupalDateTime::createFromTimestamp($log->get('timestamp')->value, 'UTC')->format('c'));
     $this->assertEquals('done', $log->get('status')->value);
+    $this->assertEquals('Soil test: ece3a2a8-4340-48b1-ae1f-d48d1f1e1692', $log->get('name')->value);
 
     // @todo Test lab metadata.
     // @todo Include modus test ID in log.
