@@ -1,0 +1,8 @@
+name: Modus Import
+description: Provides an importer for Modus results.
+type: module
+package: farmOS Contrib
+core_version_requirement: ^9
+dependencies:
+  - farm_import
+  - farm_modus
