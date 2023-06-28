@@ -66,10 +66,18 @@ class LabTestSoil implements DenormalizerInterface, SerializerAwareInterface {
         'timestamp' => $event->get('date')->getDateTime()->format('U'),
         'name' => $this->t('Soil test: @id', ['@id' => $event->get('id')->getValue()]),
       ];
+      /** @var \Drupal\farm_modus_soil\Plugin\DataType\ModusSampleSoil $sample */
       foreach ($event->get('samples') as $sample) {
 
-        // Create log and quantities.
+        // Create log.
         $log = Log::create($default_log_data);
+
+        // Add geolocation if provided.
+        if ($geometry = $sample->get('geolocation')->getValue()) {
+          $log->set('geometry', $geometry->out('wkt'));
+        }
+
+        // Create quantities.
         $quantities = [];
 
         // Depths.
