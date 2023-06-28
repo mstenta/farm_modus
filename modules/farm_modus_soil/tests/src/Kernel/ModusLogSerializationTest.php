@@ -43,6 +43,7 @@ class ModusLogSerializationTest extends KernelTestBase {
     'farm_entity_fields',
     'farm_field',
     'farm_format',
+    'farm_location',
     'farm_log',
     'farm_log_asset',
     'farm_log_quantity',
@@ -80,6 +81,9 @@ class ModusLogSerializationTest extends KernelTestBase {
     $this->serializer = $this->container->get('serializer');
 
     $this->installEntitySchema('taxonomy_term');
+    $this->installConfig([
+      'farm_lab_test',
+    ]);
   }
 
   /**
@@ -102,6 +106,9 @@ class ModusLogSerializationTest extends KernelTestBase {
     $this->assertEquals('2021-09-24T00:00:00+00:00', DrupalDateTime::createFromTimestamp($log->get('timestamp')->value, 'UTC')->format('c'));
     $this->assertEquals('done', $log->get('status')->value);
     $this->assertEquals('Soil test: ece3a2a8-4340-48b1-ae1f-d48d1f1e1692', $log->get('name')->value);
+
+    // Test log geometry.
+    $this->assertEquals('POINT (-93.4889343 12.342342)', $log->get('geometry')->value);
 
     // @todo Test lab metadata.
     // @todo Include modus test ID in log.
