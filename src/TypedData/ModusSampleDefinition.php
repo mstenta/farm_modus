@@ -20,8 +20,7 @@ abstract class ModusSampleDefinition extends ComplexDataDefinitionBase {
     $properties['fmisid'] = DataDefinition::create('string');
     $properties['collection_date'] = DataDefinition::create('datetime_iso8601');
 
-    // @todo Add geolocation type.
-    $properties['geolocation'] = DataDefinition::create('string');
+    $properties['geolocation'] = DataDefinition::create('modus_geolocation');
 
     return $properties;
   }

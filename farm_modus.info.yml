@@ -3,3 +3,5 @@ description: Provides features for working with Modus data in farmOS.
 type: module
 package: farmOS Contrib
 core_version_requirement: ^9
+dependencies:
+  - geofield

@@ -63,12 +63,18 @@ class ModusEventSoil extends ModusEventBase implements DenormalizerInterface {
     $samples = [];
     foreach ($data['EventSamples']['Soil']['SoilSamples'] as $sample) {
 
+      // Get geolocation if provided.
+      $geolocation = NULL;
+      if (isset($sample['SampleMetaData']['Geometry']['wkt'])) {
+        $geolocation = $this->geoPhp->load($sample['SampleMetaData']['Geometry']['wkt']);
+      }
+
       $sample_object = [
         'type' => 'soil',
         'id' => $sample['SampleMetaData']['SampleNumber'] ?? NULL,
         'labid' => $sample['SampleMetaData']['ReportID'] ?? NULL,
         'fmisid' => $sample['SampleMetaData']['FMISSampleID'] ?? NULL,
-        'geolocation' => $sample['SampleMetaData']['Geometry']['wkt'] ?? NULL,
+        'geolocation' => $geolocation,
         'collection_date' => $sample['SampleMetaData']['CollectionDate'] ?? NULL,
         'results' => [],
       ];
