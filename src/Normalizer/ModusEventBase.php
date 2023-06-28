@@ -3,6 +3,7 @@
 namespace Drupal\farm_modus\Normalizer;
 
 use Drupal\Core\TypedData\TypedDataManagerInterface;
+use Drupal\geofield\GeoPHP\GeoPHPInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
@@ -20,10 +21,18 @@ abstract class ModusEventBase implements DenormalizerInterface {
   protected $typedDataManager;
 
   /**
+   * The GeoPHP service.
+   *
+   * @var \Drupal\geofield\GeoPHP\GeoPHPInterface
+   */
+  protected $geoPhp;
+
+  /**
    * Constructs a ModusEventbase object.
    */
-  public function __construct(TypedDataManagerInterface $typed_data_manager) {
+  public function __construct(TypedDataManagerInterface $typed_data_manager, GeoPHPInterface $geo_php) {
     $this->typedDataManager = $typed_data_manager;
+    $this->geoPhp = $geo_php;
   }
 
   /**

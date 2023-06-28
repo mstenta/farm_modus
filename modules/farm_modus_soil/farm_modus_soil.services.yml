@@ -3,7 +3,7 @@ services:
     class: Drupal\farm_modus_soil\Normalizer\ModusEventSoil
     tags:
       - { name: normalizer, priority: 10 }
-    arguments: ['@typed_data_manager']
+    arguments: ['@typed_data_manager', '@geofield.geophp']
   serializer.farm_modus_soil.normalizer.lab_test_soil:
     class: Drupal\farm_modus_soil\Normalizer\LabTestSoil
     tags:

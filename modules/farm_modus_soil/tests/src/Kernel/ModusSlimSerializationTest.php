@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\farm_modus_soil\Kernel;
 
+use Drupal\farm_modus\Plugin\DataType\Geometry;
 use Drupal\farm_modus\TypedData\ModusResultNutrientDefinition;
 use Drupal\farm_modus\TypedData\ModusSlimBaseDefinition;
 use Drupal\KernelTests\KernelTestBase;
@@ -38,6 +39,7 @@ class ModusSlimSerializationTest extends KernelTestBase {
   protected static $modules = [
     'farm_modus',
     'farm_modus_soil',
+    'geofield',
     'serialization',
   ];
 
@@ -78,6 +80,21 @@ class ModusSlimSerializationTest extends KernelTestBase {
     $samples = $event->get('samples');
     $this->assertCount(1, $samples);
     $sample = $samples->first();
+
+    // Test sample metadata.
+    // Test geolocation.
+    $geolocation = $sample->get('geolocation');
+    $this->assertTrue($geolocation instanceof Geometry);
+
+    // Test geolocation Point geometry.
+    /** @var \Geometry $geolocation */
+    $geometry = $geolocation->getValue();
+    $this->assertTrue($geometry instanceof \Geometry);
+    $this->assertEquals($geolocation->getValue()->geometryType(), 'Point');
+    $this->assertTrue($geometry instanceof \Point);
+    $this->assertEquals($geometry->x(), '12.342342');
+    $this->assertEquals($geometry->y(), '-93.4889343');
+    $this->assertEquals($geometry->out('wkt'), "POINT (12.342342 -93.4889343)");
 
     // Test sample results.
     $results = $sample->get('results');
