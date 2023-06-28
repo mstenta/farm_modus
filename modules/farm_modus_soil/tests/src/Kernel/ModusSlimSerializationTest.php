@@ -90,11 +90,11 @@ class ModusSlimSerializationTest extends KernelTestBase {
     /** @var \Geometry $geolocation */
     $geometry = $geolocation->getValue();
     $this->assertTrue($geometry instanceof \Geometry);
-    $this->assertEquals($geolocation->getValue()->geometryType(), 'Point');
+    $this->assertEquals('Point', $geometry->geometryType(), 'Point');
     $this->assertTrue($geometry instanceof \Point);
-    $this->assertEquals($geometry->x(), '-93.4889343');
-    $this->assertEquals($geometry->y(), '12.342342');
-    $this->assertEquals($geometry->out('wkt'), "POINT (-93.4889343 12.342342)");
+    $this->assertEquals('-93.4889343', $geometry->x());
+    $this->assertEquals('12.342342', $geometry->y());
+    $this->assertEquals("POINT (-93.4889343 12.342342)", $geometry->out('wkt'));
 
     // Test sample results.
     $results = $sample->get('results');
