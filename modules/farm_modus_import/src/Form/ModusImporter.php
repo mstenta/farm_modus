@@ -186,6 +186,16 @@ class ModusImporter extends FormBase {
         '#disabled' => TRUE,
       ];
 
+      // Display the sample geometry if provided.
+      if ($geometry = $log->get('geometry')->value) {
+        $form['output']['logs'][$i]['geometry'] = [
+          '#type' => 'farm_map',
+          '#map_settings' => [
+            'wkt' => $geometry,
+          ],
+        ];
+      }
+
       // Summarize the quantities.
       $quantity_summaries = array_map(function (QuantityInterface $quantity) {
         return $this->entityTypeManager->getViewBuilder('quantity')->view($quantity);
