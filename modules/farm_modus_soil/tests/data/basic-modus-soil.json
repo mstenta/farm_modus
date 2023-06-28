@@ -60,7 +60,7 @@
                 "SampleNumber": "1",
                 "ReportID": "28051",
                 "Geometry": {
-                  "wkt": "POINT (12.342342 -93.4889343)"
+                  "wkt": "POINT (-93.4889343 12.342342)"
                 }
               },
               "Depths": [
